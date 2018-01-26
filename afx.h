@@ -1,6 +1,7 @@
 #ifndef __H_AFX_H__
 #define __H_AFX_H__
 ////////////////////////////////////////////////////////////////////////////
+#define LANGUAGE_CPP
 #define LINUX
 ////////////////////////////////////////////////////////////////////////////
 #ifndef LINUX
@@ -24,10 +25,13 @@
 #include <termios.h>
 #include <signal.h>
 ////////////////////////////////////////////////////////////////////////////
+#ifdef _MSC_VER
+typedef __int64 int64_t
+#else
 #include <stdint.h>
+#endif
 ////////////////////////////////////////////////////////////////////////////
 #define ZERO 0
-#define xassert assert
 ////////////////////////////////////////////////////////////////////////////
 #define Kbyte(x) (1024 * (x))
 #define Mbyte(x) (1024 * 1024 * (x))
@@ -97,10 +101,9 @@ void safefree(void ** ptr) ;
 #define xfree(p) safefree((void **)&(p))
 #define xmalloc(x) (char*)safemalloc((unsigned int)(x))
 #define xrealloc(oldp,x) (char*)saferealloc((oldp), (unsigned int)(x))
-#define xcalloc(count, size) calloc((count), (size))
 #define null NULL
 ////////////////////////////////////////////////////////////////////////////
-#define xzero(buf, count) memset((buf), ZERO, (count))
+#define xzero(buf, count) memset((buf), 0, (count))
 #define xmemset(buf, v, count) memset((buf), (v), (count))
 ////////////////////////////////////////////////////////////////////////////
 float stov ( char * s ) ;
