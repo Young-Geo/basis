@@ -1,6 +1,3 @@
-//  Created by 胡兵兵 on 16/4/1.
-//  Copyright © 2016年 xxx_orgnization. All rights reserved.
-//
 
 #ifndef _H_XARRAY_H_
 #define _H_XARRAY_H_

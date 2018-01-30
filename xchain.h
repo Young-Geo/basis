@@ -3,7 +3,7 @@
 
 #include "afx.h"
 
-#define BUFFER_GRANULE  512
+#define BUFFER_GRANULE  1024
 
 struct xchain_granule
 {
