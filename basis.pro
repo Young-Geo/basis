@@ -19,7 +19,10 @@ SOURCES += \
     xsocket.cpp \
     xtime.cpp \
     xtreap.cpp \
-    xudp.cpp
+    xudp.cpp \
+    Ythreadpool.cpp \
+    Yenet.cpp \
+    Yevent.cpp
 
 HEADERS += \
     afx.h \
@@ -37,4 +40,7 @@ HEADERS += \
     xsocket.h \
     xtime.h \
     xtreap.h \
-    xudp.h
+    xudp.h \
+    Ythreadpool.h \
+    Yenet.h \
+    Yevent.h

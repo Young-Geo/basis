@@ -82,6 +82,7 @@ typedef unsigned short  u16 ;
 typedef unsigned int    u32 ;
 typedef void * 			p_g;
 
+#define xassert(x) assert((x))
 ////////////////////////////////////////////////////////////////////////////
 void * saferealloc( void * oldmen , unsigned int size) ;
 void * safemalloc(unsigned int size) ;
