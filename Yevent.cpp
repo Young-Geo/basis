@@ -176,7 +176,7 @@ static void     MasterWorkFunc(int fd, short which, void *arg)
 {
     //an 应该接受链接 分配到不同的event
 
-    int cfd = 0, _entitysSize;
+    int cfd = 0;
     struct sockaddr_in caddr;
     socklen_t slen;
     entity_t *entity = NULL;
@@ -193,7 +193,10 @@ static void     MasterWorkFunc(int fd, short which, void *arg)
     }
 
     master->last_event = (master->last_event + 1) % master->entitysSize;
-    n = xlist_index(master->entitys, master->last_event);
+    if (!(n = xlist_index(master->entitys, master->last_event))) {
+        xerror("get entity ");
+        return;
+    }
     entity = (entity_t *)n->value;
 
     if (sizeof(cfd) != write(entity->notify_send_fd, &cfd, sizeof(cfd))) {
@@ -249,7 +252,23 @@ Yevent_t*    Yevent_Create(const char *ip, const unsigned short port)
 
 void            Yevent_Destory(Yevent_t *yevent)
 {
+    master_t *master = NULL;
 
+    xassert(master = (master_t *)yevent);
+
+
+    if (master->threadPool) {
+        xassert(threadpool_destroy(master->threadPool, threadpool_graceful) == 0);//threadpool_graceful
+    }
+
+    if (master->entitys) {
+        xlist_clean(&master->entitys);
+    }
+
+
+    atexit(enet_deinitialize);
+
+    xfree(master);
     return ;
 }
 int             Yevent_Start(Yevent_t *yevent, int workNum)
