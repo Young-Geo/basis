@@ -265,9 +265,6 @@ void            Yevent_Destory(Yevent_t *yevent)
         xlist_clean(&master->entitys);
     }
 
-
-    atexit(enet_deinitialize);
-
     xfree(master);
     return ;
 }
